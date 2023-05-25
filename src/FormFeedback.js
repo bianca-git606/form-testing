@@ -1,17 +1,15 @@
 import { useState } from "react"
 
-export const FormFeedback = () => {
+function FormFeedback({onSubmit}) {
     const[score, setScore] = useState('10');
     const[comment, setComment] = useState("");
 
     const isDisabled = Number(score) < 5 && comment.length < 10;
 
     const handleSubmit = (e) => {
-
         e.preventDefault();
-        console.log("Feedback received!")
-        setScore('10');
-        setComment("");
+        onSubmit({score, comment});
+
     }
 
     const placeHolderText = isDisabled ? 
@@ -24,7 +22,7 @@ export const FormFeedback = () => {
                 <fieldset>
                     <h1>Feedback Form</h1>
                     <div className="field">
-                        <label htmlFor="score">Score: {score}</label>
+                        <label htmlFor="score">Score: {score} ⭐</label>
                         <input
                             id="score" 
                             value={score} 
@@ -35,7 +33,7 @@ export const FormFeedback = () => {
                         />
                     </div>
                     <div className="field">
-                        <label htmlFor="comment">Comment: </label>
+                        <label htmlFor="comment">Comments: </label>
                         <textarea
                             placeholder={placeHolderText} 
                             id="comment"
@@ -48,4 +46,6 @@ export const FormFeedback = () => {
             </form>
         </div>
     );
-}
+};
+
+export default FormFeedback;
